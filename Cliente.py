@@ -44,8 +44,8 @@ class Cliente(threading.Thread):
         self.pedidoAtendido.wait()
 
     def recebePedido(self):
-        time.sleep(1)
         print(self.nome + " recebeu o pedido")
+        time.sleep(1)
 
     def consomePedido(self):
         print(self.nome + " está consumindo o pedido")
@@ -53,7 +53,6 @@ class Cliente(threading.Thread):
         print(self.nome + " terminou de consumir seu pedido")
         self.vaiPedir.set()
         self.jaBebeu.set()
-        time.sleep(1)
 
     def getNome(self):
         return self.nome
@@ -62,6 +61,4 @@ class Cliente(threading.Thread):
         self.pedidoAtendido.set()
     
     def clearJaBebeu(self):
-        # print(self.jaBebeu.is_set())
         self.jaBebeu.clear()
-        # print(self.jaBebeu.is_set())

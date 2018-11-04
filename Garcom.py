@@ -20,7 +20,6 @@ class Garcom(threading.Thread):
                 self.bar.avisaHorarioFechamento()
             else:
                 pedidos = self.recebePedidos()
-                print("SAIU", len(pedidos), self.capacidade)
                 self.registraPedidos(pedidos)
                 self.entregaPedidos(pedidos)
                 if(self.bar.filaEstaVazia()):
@@ -28,27 +27,20 @@ class Garcom(threading.Thread):
                 
 
 
-            
-
     def recebePedidos(self):
         print(self.nome + " recebendo pedidos")
-        time.sleep(1)
         pedidos = []
         while(len(pedidos) < self.capacidade and not self.bar.filaEstaVazia()):
             pedidos.append(self.bar.entregaPedidoProGarcom())
+            time.sleep(((random.random() * 10) % 3) / 10)
         return pedidos
     
     def registraPedidos(self, pedidos):
         print(self.nome + " registrando pedidos")
-        time.sleep(1)
-        time.sleep(random.random() * 10)
+        time.sleep(random.random() * 3)
 
     def entregaPedidos(self, pedidos):
         for cliente in pedidos:
             print(self.nome + " entregando pedido para " + cliente.getNome())
-            time.sleep(1)
             time.sleep(random.random() * 10)
             cliente.setPedidoAtendido()
-
-    def atingiuMaxPedidos(self):
-        return (self.numeroPedidosAtual >= self.capacidade)
