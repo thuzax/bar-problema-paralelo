@@ -21,18 +21,23 @@ def main():
     print(capacidadeGarcons)
     print(numeroRodadas)
 
+    # inicializa a instancia de bar
     bar = Bar(numeroRodadas, numeroClientes)
 
+    # cria os clientes
     for i in range(numeroClientes):
         clientes.append(Cliente("cliente"+str(i), bar))
 
     bar.setClientes(clientes)
 
+    # cria os garcons
     for i in range(numeroGarcons):
         garcons.append(Garcom("garcom"+str(i), capacidadeGarcons, bar))
 
+    # comeca a execucao das threads dos garcons
     for garcom in garcons:
         garcom.start()
+    # comeca a execucao das threads dos clientes
     for cliente in clientes:
         cliente.start()
 
